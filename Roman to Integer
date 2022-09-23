@@ -1,0 +1,32 @@
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan= new Scanner(System.in);
+        String s= scan.nextLine();
+        char[] input = s.toCharArray();
+        HashMap<Character, Integer> romanNum = new HashMap<Character, Integer>() {{
+            put('I', 1);
+            put('V', 5);
+            put('X', 10);
+            put('L', 50);
+            put('C', 100);
+            put('D', 500);
+            put('M', 1000);
+        }};
+
+        int result=0;
+
+        for (int i=input.length-1; i>=0; i--){
+
+            if(i>0 && romanNum.get(input[i])>romanNum.get(input[i-1])) {
+                result+= (romanNum.get(input[i]) - 2*romanNum.get(input[i - 1])) ;
+            }
+            else result=result+romanNum.get(input[i]);
+        }
+        System.out.println(result);
+    }
+  }

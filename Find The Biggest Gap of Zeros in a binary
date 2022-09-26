@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner= new Scanner(System.in);
+        int input= scanner.nextInt();
+        String binaryRepresentaion= Integer.toBinaryString(input);
+        int difference=0;
+        int temp=0;
+
+        for (int i=0; i<binaryRepresentaion.length(); i++) {
+
+            if (binaryRepresentaion.charAt(i) == '0') {
+                temp+=1;
+                if (i==binaryRepresentaion.length()-1 || binaryRepresentaion.charAt(i+1)=='1'){
+                    if(difference<temp) difference= temp;
+                    temp=0;
+                }
+            }
+        }
+        System.out.println(difference);
+    }
+}

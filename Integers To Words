@@ -1,0 +1,44 @@
+
+public class Main {
+
+    public static void main(String[] args) {
+    Scanner scan= new Scanner(Syystem.in);
+    int num= scan.nextInt();
+        System.out.println(numberToWords(num));
+    }
+    
+    public static String numberToWords(int num) {
+        final String[] thousands = {"Billion", "Million", "Thousand",""};
+        String solution="";
+        if(num==0){solution+="Zero";}
+        else {
+            int j = 0;
+            for (int i = 1000000000; num > 0; i /= 1000) {
+                if (i <= num) {
+                    solution += getEnglish((num / i)) + " " + thousands[j] + " ";
+                    num %= i;
+                }
+                j++;
+            }
+        }
+        return solution.trim();
+    }
+    
+    public static String getEnglish(int num){
+        final String[] under20 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+         final String[] under100 = {"", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+        String word="";
+        int part=num/100;
+        if(part>0) word+=under20[part]+" Hundred ";
+        num%=100;
+        if(num<20) {word+=under20[num];}
+        else {
+            part=num/10;
+            word+=under100[part];
+            num%=10;
+         if(num>0) word+=" "+under20[num];
+        }
+       return word.trim();
+    }
+}
